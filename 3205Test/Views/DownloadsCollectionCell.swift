@@ -22,7 +22,6 @@ class DownloadsCollectionCell: UICollectionViewCell {
     
     private func configure() {
         bgView.layer.cornerRadius = 20
-        
     }
     
 }
