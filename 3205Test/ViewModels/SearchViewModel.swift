@@ -36,7 +36,8 @@ class SearchViewModel {
         GitHubAPIClient.shared.getRepositories(for: user.login, pageNum: pageNum) { (result) in
             switch result {
             case .success(let repositories):
-                self.visibleRepositories += repositories
+                if self.pageNum > 1 { self.visibleRepositories += repositories }
+                else { self.visibleRepositories = repositories }
             case .failure(_):
                 self.visibleRepositories = []
             }

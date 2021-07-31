@@ -12,6 +12,9 @@ struct RepositoryItem: Codable {
     var name: String
     var url: String
     var owner: RepositoryOwner
+    var created_at: String
+    var description: String?
+    var html_url: String
 }
 
 struct RepositoryOwner: Codable {

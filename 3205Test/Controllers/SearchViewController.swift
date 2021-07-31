@@ -11,21 +11,42 @@ class SearchViewController: UITableViewController {
 
     @IBOutlet var searchBar: UISearchBar!
     
+    private var errorLabel = UILabel()
+    
     var viewModel: SearchViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        customizeNavBarController()
         navigationItem.titleView = searchBar
         navigationItem.largeTitleDisplayMode = .never
         setupSearchBar()
+        setupViews()
         configure()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        customizeNavBarController()
     }
     
     private func configure() {
         let nibCell = UINib(nibName: "SearchTableCell", bundle: nil)
-        tableView.register(nibCell, forCellReuseIdentifier: "CellId")
+        tableView.register(nibCell, forCellReuseIdentifier: SearchTableCell.reuseId)
+    }
+    
+    private func setupViews() {
+        errorLabel.alpha = 0
+        errorLabel.textColor = .lightGray
+        errorLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(errorLabel)
+        
+        NSLayoutConstraint.activate([
+            errorLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            errorLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 30)
+        ])
     }
     
     //MARK: - Setting Up Search Bar
@@ -40,7 +61,7 @@ class SearchViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CellId", for: indexPath) as! SearchTableCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableCell.reuseId, for: indexPath) as! SearchTableCell
         cell.repositoryName.text = viewModel.visibleRepositories[indexPath.row].name
         return cell
     }
@@ -53,30 +74,50 @@ class SearchViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let lastElement = viewModel.maxVisibleRepositories - 1
         if indexPath.row == lastElement {
-//            print("Loading...")
             viewModel.pageNum += 1
             viewModel.maxVisibleRepositories += Constants.APIDetails.repositoriesPerPage
             viewModel.searchForUser { result in
-                if let result = result { print(result)}
                 DispatchQueue.main.async {
+                    if let result = result, self.viewModel.searchUser.count > 0 {
+                        self.errorLabel.text = result
+                        self.errorLabel.alpha = 1
+                    }
                     self.tableView.reloadData()
                 }
             }
         }
     }
 
+    //MARK: - Go To Selected Repository
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let repositoryVC: SelectedRepositoryViewController = .instantiate()
+        let repositoryViewModel = SelectedRepositoryViewModel()
+        repositoryViewModel.repository = viewModel.visibleRepositories[indexPath.row]
+        repositoryVC.viewModel = repositoryViewModel
+        navigationController?.pushViewController(repositoryVC, animated: true)
+    }
 }
 
 //MARK: - Search Bar Ext To Filter Visible Spotify Tracks
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(reload), object: nil)
+        self.perform(#selector(reload), with: nil, afterDelay: 0.2)
+    }
+        
+    @objc func reload() {
+        guard let searchText = searchBar.text else { return }
+        errorLabel.alpha = 0
         viewModel.maxVisibleRepositories = Constants.APIDetails.repositoriesPerPage
         viewModel.visibleRepositories = []
         viewModel.pageNum = 1
         viewModel.searchUser = searchText
         viewModel.searchForUser { result in
-            if let result = result { print(result)}
             DispatchQueue.main.async {
+                if let result = result, self.viewModel.searchUser.count > 0 {
+                    self.errorLabel.text = result
+                    self.errorLabel.alpha = 1
+                }
                 self.tableView.reloadData()
                 self.tableView.setContentOffset(CGPoint(x: 0, y: -self.tableView.contentInset.top), animated: true)
             }

@@ -24,9 +24,14 @@ class DownloadsCollectionViewController: UICollectionViewController {
         title = "Downloads"
         navigationItem.largeTitleDisplayMode = .always
         
-        customizeNavBarController()
         configure()
         setupViews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        customizeNavBarController()
     }
   
     private func configure() {

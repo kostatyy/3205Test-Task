@@ -14,7 +14,7 @@ extension UIViewController {
         return viewController
     }
     
-    func customizeNavBarController() {
+    func customizeNavBarController(clear: Bool = false) {
         let backArrowImage = UIImage(named: "backArrow")
         navigationController?.navigationBar.backIndicatorImage = backArrowImage
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = backArrowImage
@@ -22,9 +22,10 @@ extension UIViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style:.plain, target:nil, action:nil)
         
         navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.isTranslucent = clear
+        navigationController?.navigationBar.tintColor = clear ? .white : .black
         navigationController?.view.backgroundColor = .white
+        if clear { navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default) }
     }
     
     func callErrorAlert(message: String) {

@@ -27,6 +27,10 @@
 		524F8C2C26B55F7E006EB315 /* SearchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524F8C2A26B55F7E006EB315 /* SearchTableCell.swift */; };
 		524F8C2D26B55F7E006EB315 /* SearchTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 524F8C2B26B55F7E006EB315 /* SearchTableCell.xib */; };
 		524F8C3226B56EE6006EB315 /* GitHubUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524F8C3126B56EE6006EB315 /* GitHubUser.swift */; };
+		524F8C3526B58A95006EB315 /* SelectedRepositoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524F8C3426B58A94006EB315 /* SelectedRepositoryViewController.swift */; };
+		524F8C3A26B5E9FD006EB315 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524F8C3926B5E9FD006EB315 /* String+Ext.swift */; };
+		524F8C3E26B5F093006EB315 /* Colors+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524F8C3D26B5F093006EB315 /* Colors+Ext.swift */; };
+		524F8C4326B5F2C0006EB315 /* SelectedRepositoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524F8C4226B5F2C0006EB315 /* SelectedRepositoryViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +57,10 @@
 		524F8C2A26B55F7E006EB315 /* SearchTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableCell.swift; sourceTree = "<group>"; };
 		524F8C2B26B55F7E006EB315 /* SearchTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchTableCell.xib; sourceTree = "<group>"; };
 		524F8C3126B56EE6006EB315 /* GitHubUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubUser.swift; sourceTree = "<group>"; };
+		524F8C3426B58A94006EB315 /* SelectedRepositoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedRepositoryViewController.swift; sourceTree = "<group>"; };
+		524F8C3926B5E9FD006EB315 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		524F8C3D26B5F093006EB315 /* Colors+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colors+Ext.swift"; sourceTree = "<group>"; };
+		524F8C4226B5F2C0006EB315 /* SelectedRepositoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedRepositoryViewModel.swift; sourceTree = "<group>"; };
 		F0F0D7B95FB8D410DE8D90E8 /* Pods-3205Test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-3205Test.debug.xcconfig"; path = "Target Support Files/Pods-3205Test/Pods-3205Test.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +135,7 @@
 			children = (
 				524F8BBA26B2FF00006EB315 /* DownloadsCollectionViewController.swift */,
 				524F8C0226B41994006EB315 /* SearchViewController.swift */,
+				524F8C3426B58A94006EB315 /* SelectedRepositoryViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -136,6 +145,8 @@
 			children = (
 				524F8BD126B30328006EB315 /* UIViewController+Ext.swift */,
 				524F8C0A26B435D9006EB315 /* UIView+Ext.swift */,
+				524F8C3926B5E9FD006EB315 /* String+Ext.swift */,
+				524F8C3C26B5F07E006EB315 /* Colors */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -145,6 +156,7 @@
 			children = (
 				524F8BF226B3F76B006EB315 /* DownloadsViewModel.swift */,
 				524F8BFA26B3F80C006EB315 /* SearchViewModel.swift */,
+				524F8C4226B5F2C0006EB315 /* SelectedRepositoryViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -182,6 +194,14 @@
 				524F8BEC26B3F169006EB315 /* DownloadsCollectionCell.xib */,
 			);
 			path = Downloads;
+			sourceTree = "<group>";
+		};
+		524F8C3C26B5F07E006EB315 /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+				524F8C3D26B5F093006EB315 /* Colors+Ext.swift */,
+			);
+			path = Colors;
 			sourceTree = "<group>";
 		};
 		72263AB3E2009065D8CAB49C /* Pods */ = {
@@ -293,13 +313,17 @@
 			files = (
 				524F8BE126B307F1006EB315 /* DownloadsCollectionCell.swift in Sources */,
 				524F8BBB26B2FF00006EB315 /* DownloadsCollectionViewController.swift in Sources */,
+				524F8C4326B5F2C0006EB315 /* SelectedRepositoryViewModel.swift in Sources */,
 				524F8BF326B3F76B006EB315 /* DownloadsViewModel.swift in Sources */,
+				524F8C3A26B5E9FD006EB315 /* String+Ext.swift in Sources */,
 				524F8C2C26B55F7E006EB315 /* SearchTableCell.swift in Sources */,
+				524F8C3E26B5F093006EB315 /* Colors+Ext.swift in Sources */,
 				524F8BB726B2FF00006EB315 /* AppDelegate.swift in Sources */,
 				524F8BD226B30328006EB315 /* UIViewController+Ext.swift in Sources */,
 				524F8BB926B2FF00006EB315 /* SceneDelegate.swift in Sources */,
 				524F8C0326B41994006EB315 /* SearchViewController.swift in Sources */,
 				524F8C0B26B435D9006EB315 /* UIView+Ext.swift in Sources */,
+				524F8C3526B58A95006EB315 /* SelectedRepositoryViewController.swift in Sources */,
 				524F8C3226B56EE6006EB315 /* GitHubUser.swift in Sources */,
 				524F8C1C26B46B22006EB315 /* KeychainHelper.swift in Sources */,
 				524F8BFB26B3F80C006EB315 /* SearchViewModel.swift in Sources */,
