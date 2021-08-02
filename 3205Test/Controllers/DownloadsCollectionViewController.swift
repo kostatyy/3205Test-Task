@@ -22,9 +22,7 @@ class DownloadsCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = "Downloads"
-        
+                
         configure()
         setupViews()
     }
@@ -42,7 +40,7 @@ class DownloadsCollectionViewController: UICollectionViewController {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
                 self.warningLabel.alpha = self.viewModel.repositories.count == 0 ? 1 : 0
-                self.customizeNavBarController()
+                self.customizeNavBarController(navTitle: "Downloads")
             }
         }
     }

@@ -23,7 +23,7 @@ class SelectedRepositoryViewModel {
         let ownerName = repository.owner.login
         let repoName = repository.name
         
-        let urlString = Constants.APIDetails.baseUrl + "repos/\(ownerName)/\(repoName)/zipball"
+        let urlString = APIDetails.baseUrl + "repos/\(ownerName)/\(repoName)/zipball"
         guard let url = URL(string: urlString) else { return }
         
         DownloadFileService.shared.downloadFile(url: url, repositoryId: repository.id) { result in

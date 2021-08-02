@@ -19,9 +19,8 @@ class SelectedRepositoryViewController: UIViewController {
     @IBOutlet weak var openInBrowserView: UIView!
     @IBOutlet weak var downloadView: UIView!
     @IBOutlet weak var downloadLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    private var activityIndicator = UIActivityIndicatorView()
-
     var viewModel: SelectedRepositoryViewModel!
     
     override func viewDidLoad() {
@@ -43,6 +42,8 @@ class SelectedRepositoryViewController: UIViewController {
         repoOwnerName.text = repository.owner.login
         repoDateCreated.text = repository.created_at.formatDate()
         repoDescription.text = repository.description
+        
+        activityIndicator.color = .mainColor
         
         openInBrowserView.layer.borderWidth = 1
         openInBrowserView.layer.borderColor = UIColor.mainColor.cgColor
@@ -66,10 +67,10 @@ class SelectedRepositoryViewController: UIViewController {
     
     //MARK: - Download Or Delete Repository
     @objc private func downloadRepository() {
-        showActivityIndicator(alpha: 1)
         if !viewModel.repositoryExists() {
+            startActivityIndicator()
             viewModel.downloadRepositoryZip { (result) in
-                self.hideActivityIndicator()
+                self.stopActivityIndicator()
                 if let result = result {
                     self.callErrorAlert(message: result)
                 } else {
@@ -78,22 +79,20 @@ class SelectedRepositoryViewController: UIViewController {
                 }
             }
         }
-//        if viewModel.repositoryExists() {
-//            let alert = UIAlertController(title: "Delete Repository", message: "Do you want to delete this repository?", preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "Yes", style: .default) { action in
-//                self.dismiss(animated: true) {
-//                    self.viewModel.deleteRepository { (result) in
-//                        if let result = result {
-//                            self.callErrorAlert(message: result)
-//                        }
-//                    }
-//                }
-//            })
-//            alert.addAction(UIAlertAction(title: "Cancel", style: .destructive) { action in
-//                self.dismiss(animated: true, completion: nil)
-//            })
-//            present(alert, animated: true)
-//        }
     }
     
+}
+
+extension SelectedRepositoryViewController {
+    func startActivityIndicator() {
+        DispatchQueue.main.async {
+            self.activityIndicator.startAnimating()
+        }
+    }
+    
+    func stopActivityIndicator() {
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+        }
+    }
 }

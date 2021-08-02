@@ -7,17 +7,16 @@
 
 import UIKit
 
-fileprivate var aView: UIView?
-
 extension UIViewController {
-    static func instantiate<T>(storyboardName: String = "Main") -> T {
+    static func instantiate<T: UIViewController>(storyboardName: String = "Main") -> T {
         let storyboard = UIStoryboard(name: storyboardName, bundle: .main)
         let viewController = storyboard.instantiateViewController(withIdentifier: "\(T.self)") as! T
         return viewController
     }
     
-    func customizeNavBarController(clear: Bool = false) {
+    func customizeNavBarController(navTitle: String? = nil, clear: Bool = false) {
         let backArrowImage = UIImage(named: "backArrow")
+        if let navTitle = navTitle { title = navTitle }
         navigationController?.navigationBar.backIndicatorImage = backArrowImage
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = backArrowImage
         navigationController?.navigationBar.backItem?.title = ""
@@ -28,6 +27,9 @@ extension UIViewController {
         navigationController?.navigationBar.tintColor = clear ? .white : .black
         navigationController?.view.backgroundColor = .white
         if clear { navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default) }
+        navigationController?.navigationBar.titleTextAttributes = [
+            .foregroundColor: UIColor.black
+        ]
     }
     
     func callErrorAlert(message: String) {
@@ -36,29 +38,5 @@ extension UIViewController {
             self.dismiss(animated: true, completion: nil)
         })
         present(alert, animated: true)
-    }
-    
-    //MARK: - Show activity Indicator
-    func showActivityIndicator(alpha: CGFloat = 0) {
-        aView = UIView(frame: self.view.bounds)
-        aView?.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: alpha)
-        
-        var activityIndicator = UIActivityIndicatorView()
-        if #available(iOS 13.0, *) {
-            activityIndicator = UIActivityIndicatorView(style: .large)
-        } else {
-            activityIndicator = UIActivityIndicatorView()
-        }
-        activityIndicator.color = .mainColor
-        activityIndicator.center = aView!.center
-        activityIndicator.startAnimating()
-        aView?.addSubview(activityIndicator)
-        self.view.addSubview(aView!)
-    }
-    
-    //MARK: - Hide activity Indicator
-    func hideActivityIndicator() {
-        aView?.removeFromSuperview()
-        aView = nil
     }
 }

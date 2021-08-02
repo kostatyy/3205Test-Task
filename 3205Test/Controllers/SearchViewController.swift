@@ -8,16 +8,17 @@
 import UIKit
 
 class SearchViewController: UITableViewController {
-
+    
     @IBOutlet var searchBar: UISearchBar!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     private var errorLabel = UILabel()
     
     var viewModel: SearchViewModel!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         navigationItem.titleView = searchBar
         setupSearchBar()
         setupViews()
@@ -39,6 +40,7 @@ class SearchViewController: UITableViewController {
         errorLabel.alpha = 0
         errorLabel.textColor = .lightGray
         errorLabel.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.layer.zPosition = 3
         
         view.addSubview(errorLabel)
         
@@ -53,7 +55,7 @@ class SearchViewController: UITableViewController {
         searchBar.becomeFirstResponder()
         searchBar.delegate = self
     }
-
+    
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.visibleRepositories.count
@@ -74,7 +76,7 @@ class SearchViewController: UITableViewController {
         let lastElement = viewModel.maxVisibleRepositories - 1
         if indexPath.row == lastElement {
             viewModel.pageNum += 1
-            viewModel.maxVisibleRepositories += Constants.APIDetails.repositoriesPerPage
+            viewModel.maxVisibleRepositories += APIDetails.repositoriesPerPage
             viewModel.searchForUser { result in
                 DispatchQueue.main.async {
                     if let result = result, self.viewModel.searchUser.count > 0 {
@@ -86,7 +88,7 @@ class SearchViewController: UITableViewController {
             }
         }
     }
-
+    
     //MARK: - Go To Selected Repository
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let repositoryVC: SelectedRepositoryViewController = .instantiate()
@@ -103,23 +105,28 @@ extension SearchViewController: UISearchBarDelegate {
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(reload), object: nil)
         self.perform(#selector(reload), with: nil, afterDelay: 0.2)
     }
-        
+    
     @objc func reload() {
         guard let searchText = searchBar.text else { return }
         errorLabel.alpha = 0
-        viewModel.maxVisibleRepositories = Constants.APIDetails.repositoriesPerPage
+        activityIndicator.startAnimating()
+        viewModel.maxVisibleRepositories = APIDetails.repositoriesPerPage
         viewModel.visibleRepositories = []
         viewModel.pageNum = 1
         viewModel.searchUser = searchText
-        viewModel.searchForUser { result in
-            DispatchQueue.main.async {
-                if let result = result, self.viewModel.searchUser.count > 0 {
-                    self.errorLabel.text = result
-                    self.errorLabel.alpha = 1
+        DispatchQueue.global(qos: .utility).async {
+            self.viewModel.searchForUser { result in
+                DispatchQueue.main.async {
+                    if let result = result, self.viewModel.searchUser.count > 0 {
+                        self.errorLabel.text = result
+                        self.errorLabel.alpha = 1
+                    }
+                    self.activityIndicator.stopAnimating()
+                    self.tableView.reloadData()
+                    self.tableView.setContentOffset(CGPoint(x: 0, y: -self.tableView.contentInset.top), animated: true)
                 }
-                self.tableView.reloadData()
-                self.tableView.setContentOffset(CGPoint(x: 0, y: -self.tableView.contentInset.top), animated: true)
             }
         }
+        
     }
 }

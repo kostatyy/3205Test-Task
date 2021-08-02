@@ -28,15 +28,6 @@ final class RepositoriesCoreDataManager {
         persistentContainer.viewContext
     }
     
-    //MARK: - Get Saved Repository
-    func getRepository(id: NSManagedObjectID) -> Repository? {
-        do {
-            return try moc.existingObject(with: id) as? Repository
-        } catch {
-            return nil
-        }
-    }
-    
     // MARK: - Save Repository To CoreData
     func saveRepository(repositoryInfo: RepositoryItem) {
         let newRepo = Repository(context: moc)
@@ -62,17 +53,6 @@ final class RepositoriesCoreDataManager {
             return repositories
         } catch {
             return []
-        }
-    }
-    
-    //MARK: - Delete Repository
-    func deleteRepository(id: NSManagedObjectID) {
-        do {
-            let deletingRepository = try moc.existingObject(with: id) as! Repository
-            moc.delete(deletingRepository)
-            try moc.save()
-        } catch let error {
-            print(error.localizedDescription)
         }
     }
 }

@@ -12,7 +12,7 @@ class SearchViewModel {
     var visibleRepositories = [RepositoryItem]()
     var searchUser = ""
     var pageNum = 1
-    var maxVisibleRepositories = Constants.APIDetails.repositoriesPerPage
+    var maxVisibleRepositories = APIDetails.repositoriesPerPage
     
     // MARK: - Search GitHub User
     func searchForUser(completion: @escaping (String?)->()) {
