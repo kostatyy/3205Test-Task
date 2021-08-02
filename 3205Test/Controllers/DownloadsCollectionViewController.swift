@@ -121,12 +121,6 @@ extension DownloadsCollectionViewController: WKNavigationDelegate {
         
         decisionHandler(.allow)
     }
-    
-    //MARK: - Handling Auth Errors
-    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-//        let message: String = error.localizedDescription
-//        authNavController.callErrorAlert(message: message)
-    }
 }
 
 
@@ -139,4 +133,12 @@ extension DownloadsCollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DownloadsCollectionCell.reuseId, for: indexPath) as! DownloadsCollectionCell
         return cell
     }
+    
+//    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let repositoryVC: SelectedRepositoryViewController = .instantiate()
+//        let repositoryViewModel = SelectedRepositoryViewModel()
+//        repositoryViewModel.repository = viewModel.visibleRepositories[indexPath.row]
+//        repositoryVC.viewModel = repositoryViewModel
+//        navigationController?.pushViewController(repositoryVC, animated: true)
+//    }
 }

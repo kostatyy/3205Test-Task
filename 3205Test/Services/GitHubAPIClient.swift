@@ -82,8 +82,6 @@ class GitHubAPIClient {
             guard let data = data else { return }
             
             do {
-//                let res = try JSONSerialization.jsonObject(with: data, options: [])
-//                print(res)
                 let decoder = JSONDecoder()
                 let repositories: [RepositoryItem] = try decoder.decode([RepositoryItem].self, from: data)
                 completion(.success(repositories))

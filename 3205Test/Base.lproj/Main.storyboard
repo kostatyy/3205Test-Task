@@ -162,6 +162,7 @@
                     </view>
                     <connections>
                         <outlet property="bgView" destination="CJy-vI-NQh" id="5Py-b7-lA7"/>
+                        <outlet property="downloadLabel" destination="qdl-y3-esb" id="WAb-IS-7am"/>
                         <outlet property="downloadView" destination="SkW-cG-N5g" id="lZx-kZ-hSe"/>
                         <outlet property="openInBrowserView" destination="hd4-xe-JIk" id="ASA-ry-NU9"/>
                         <outlet property="repoDateCreated" destination="YdX-yf-q0V" id="2Rt-K9-H88"/>

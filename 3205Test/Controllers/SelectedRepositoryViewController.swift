@@ -18,6 +18,7 @@ class SelectedRepositoryViewController: UIViewController {
     
     @IBOutlet weak var openInBrowserView: UIView!
     @IBOutlet weak var downloadView: UIView!
+    @IBOutlet weak var downloadLabel: UILabel!
     
     var viewModel: SelectedRepositoryViewModel!
     
@@ -46,7 +47,11 @@ class SelectedRepositoryViewController: UIViewController {
         openInBrowserView.layer.cornerRadius = 30
         downloadView.layer.cornerRadius = 30
         
+        downloadView.backgroundColor = viewModel.repositoryExists() ? .red : .mainColor
+        downloadLabel.text = viewModel.repositoryExists() ? "Delete" : "Download"
+        
         openInBrowserView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openInBrowser)))
+        downloadView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(downloadRepository)))
     }
     
     //MARK: - Open Repository In Browser
@@ -57,9 +62,33 @@ class SelectedRepositoryViewController: UIViewController {
         }
     }
     
-    //MARK: - Download Repository
+    //MARK: - Download Or Delete Repository
     @objc private func downloadRepository() {
-        
+        if viewModel.repositoryExists() {
+            let alert = UIAlertController(title: "Delete Repository", message: "Do you want to delete this repository?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default) { action in
+                self.dismiss(animated: true) {
+                    self.viewModel.deleteRepository { (result) in
+                        if let result = result {
+                            self.callErrorAlert(message: result)
+                        }
+                    }
+                }
+            })
+            alert.addAction(UIAlertAction(title: "Cancel", style: .destructive) { action in
+                self.dismiss(animated: true, completion: nil)
+            })
+            present(alert, animated: true)
+        } else {
+            viewModel.downloadRepositoryZip { (result) in
+                if let result = result {
+                    self.callErrorAlert(message: result)
+                } else {
+                    self.downloadView.backgroundColor = .red
+                    self.downloadLabel.text = "Delete"
+                }
+            }
+        }
     }
     
 }

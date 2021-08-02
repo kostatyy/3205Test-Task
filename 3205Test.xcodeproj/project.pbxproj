@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -31,6 +31,8 @@
 		524F8C3A26B5E9FD006EB315 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524F8C3926B5E9FD006EB315 /* String+Ext.swift */; };
 		524F8C3E26B5F093006EB315 /* Colors+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524F8C3D26B5F093006EB315 /* Colors+Ext.swift */; };
 		524F8C4326B5F2C0006EB315 /* SelectedRepositoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524F8C4226B5F2C0006EB315 /* SelectedRepositoryViewModel.swift */; };
+		524F8C4626B6C70A006EB315 /* DownloadFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524F8C4526B6C709006EB315 /* DownloadFileService.swift */; };
+		52F55896235469EC855EAA10 /* Pods_3205Test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6970A621E04E6BE847946B /* Pods_3205Test.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +63,8 @@
 		524F8C3926B5E9FD006EB315 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		524F8C3D26B5F093006EB315 /* Colors+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colors+Ext.swift"; sourceTree = "<group>"; };
 		524F8C4226B5F2C0006EB315 /* SelectedRepositoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedRepositoryViewModel.swift; sourceTree = "<group>"; };
+		524F8C4526B6C709006EB315 /* DownloadFileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadFileService.swift; sourceTree = "<group>"; };
+		9B6970A621E04E6BE847946B /* Pods_3205Test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_3205Test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0F0D7B95FB8D410DE8D90E8 /* Pods-3205Test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-3205Test.debug.xcconfig"; path = "Target Support Files/Pods-3205Test/Pods-3205Test.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52F55896235469EC855EAA10 /* Pods_3205Test.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 		51E21FF1D62D47A82934F629 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9B6970A621E04E6BE847946B /* Pods_3205Test.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -165,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				524F8BFF26B40C79006EB315 /* GitHubAPIClient.swift */,
+				524F8C4526B6C709006EB315 /* DownloadFileService.swift */,
 				524F8C1B26B46B22006EB315 /* KeychainHelper.swift */,
 			);
 			path = Services;
@@ -321,6 +328,7 @@
 				524F8BB726B2FF00006EB315 /* AppDelegate.swift in Sources */,
 				524F8BD226B30328006EB315 /* UIViewController+Ext.swift in Sources */,
 				524F8BB926B2FF00006EB315 /* SceneDelegate.swift in Sources */,
+				524F8C4626B6C70A006EB315 /* DownloadFileService.swift in Sources */,
 				524F8C0326B41994006EB315 /* SearchViewController.swift in Sources */,
 				524F8C0B26B435D9006EB315 /* UIView+Ext.swift in Sources */,
 				524F8C3526B58A95006EB315 /* SelectedRepositoryViewController.swift in Sources */,

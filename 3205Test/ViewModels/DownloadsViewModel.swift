@@ -8,7 +8,7 @@
 import UIKit
 
 class DownloadsViewModel {
-    
+        
     //MARK: - GitHub Auth
     func requestForCallbackURL(request: URLRequest, completion: @escaping (String?)->()) {
         let requestURLString = (request.url?.absoluteString)! as String
