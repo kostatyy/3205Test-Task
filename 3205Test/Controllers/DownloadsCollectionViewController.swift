@@ -10,8 +10,10 @@ import WebKit
 
 class DownloadsCollectionViewController: UICollectionViewController {
 
+    @IBOutlet weak var userBarButtonImage: UIBarButtonItem!
     private var viewModel = DownloadsViewModel()
     
+    private var warningLabel = UILabel()
     private var addButton = UIButton()
     
     //MARK: - Git Web View
@@ -22,7 +24,6 @@ class DownloadsCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         
         title = "Downloads"
-        navigationItem.largeTitleDisplayMode = .always
         
         configure()
         setupViews()
@@ -31,7 +32,19 @@ class DownloadsCollectionViewController: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        customizeNavBarController()
+        if GitHubAPIClient.shared.isSignedIn {
+            userBarButtonImage.image = #imageLiteral(resourceName: "logout-icon")
+        } else {
+            userBarButtonImage.image = #imageLiteral(resourceName: "user-icon")
+        }
+        
+        viewModel.getDownloadedRepositories {
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+                self.warningLabel.alpha = self.viewModel.repositories.count == 0 ? 1 : 0
+                self.customizeNavBarController()
+            }
+        }
     }
   
     private func configure() {
@@ -43,20 +56,35 @@ class DownloadsCollectionViewController: UICollectionViewController {
     }
     
     private func setupViews() {
-        addButton.backgroundColor = .red
-        addButton.setImage(UIImage(systemName: "plus")?.withRenderingMode(.alwaysOriginal).withTintColor(.white), for: .normal)
+        addButton.backgroundColor = .mainColor
+        addButton.setImage(#imageLiteral(resourceName: "plus-icon"), for: .normal)
         addButton.setupShadow(cornerRad: 13, shadowRad: 3, shadowOp: 0.3, offset: CGSize(width: 0, height: 5))
         addButton.addTarget(self, action: #selector(didTapAddButton), for: .touchUpInside)
         addButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        warningLabel.text = "There Are No Downlaoded Repositories Yet"
+        warningLabel.alpha = 0
+        warningLabel.textColor = .lightGray
+        warningLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(warningLabel)
         
         view.addSubview(addButton)
         
         NSLayoutConstraint.activate([
             addButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.13),
             addButton.heightAnchor.constraint(equalTo: addButton.widthAnchor),
-            addButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            addButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30)
+            addButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30),
+            
+            warningLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            warningLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 30)
         ])
+        
+        if #available(iOS 11.0, *) {
+            addButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        } else {
+            addButton.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        }
     }
     
     //MARK: - Open Screen To Search/Add New Repositories
@@ -123,22 +151,15 @@ extension DownloadsCollectionViewController: WKNavigationDelegate {
     }
 }
 
-
 extension DownloadsCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return viewModel.repositories.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DownloadsCollectionCell.reuseId, for: indexPath) as! DownloadsCollectionCell
+        cell.repositoryName.text = viewModel.repositories[indexPath.row].name
+        cell.repositoryOwnerName.text = viewModel.repositories[indexPath.row].ownerName
         return cell
     }
-    
-//    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let repositoryVC: SelectedRepositoryViewController = .instantiate()
-//        let repositoryViewModel = SelectedRepositoryViewModel()
-//        repositoryViewModel.repository = viewModel.visibleRepositories[indexPath.row]
-//        repositoryVC.viewModel = repositoryViewModel
-//        navigationController?.pushViewController(repositoryVC, animated: true)
-//    }
 }

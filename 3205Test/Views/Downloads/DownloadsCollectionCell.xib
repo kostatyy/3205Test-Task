@@ -68,6 +68,8 @@
             <size key="customSize" width="331" height="99"/>
             <connections>
                 <outlet property="bgView" destination="LwF-fk-BKA" id="rcn-Kx-ows"/>
+                <outlet property="repositoryName" destination="vGD-7g-kjl" id="H0T-IU-NIM"/>
+                <outlet property="repositoryOwnerName" destination="jrb-qy-OSE" id="Tf6-i4-jyT"/>
             </connections>
             <point key="canvasLocation" x="341.304347826087" y="81.361607142857139"/>
         </collectionViewCell>

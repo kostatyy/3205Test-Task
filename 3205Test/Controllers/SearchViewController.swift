@@ -19,7 +19,6 @@ class SearchViewController: UITableViewController {
         super.viewDidLoad()
 
         navigationItem.titleView = searchBar
-        navigationItem.largeTitleDisplayMode = .never
         setupSearchBar()
         setupViews()
         configure()

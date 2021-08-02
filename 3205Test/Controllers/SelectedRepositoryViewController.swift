@@ -20,6 +20,8 @@ class SelectedRepositoryViewController: UIViewController {
     @IBOutlet weak var downloadView: UIView!
     @IBOutlet weak var downloadLabel: UILabel!
     
+    private var activityIndicator = UIActivityIndicatorView()
+
     var viewModel: SelectedRepositoryViewModel!
     
     override func viewDidLoad() {
@@ -47,8 +49,8 @@ class SelectedRepositoryViewController: UIViewController {
         openInBrowserView.layer.cornerRadius = 30
         downloadView.layer.cornerRadius = 30
         
-        downloadView.backgroundColor = viewModel.repositoryExists() ? .red : .mainColor
-        downloadLabel.text = viewModel.repositoryExists() ? "Delete" : "Download"
+        downloadView.backgroundColor = viewModel.repositoryExists() ? .lightGray : .mainColor
+        downloadLabel.text = viewModel.repositoryExists() ? "Downloaded" : "Download"
         
         openInBrowserView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openInBrowser)))
         downloadView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(downloadRepository)))
@@ -64,31 +66,34 @@ class SelectedRepositoryViewController: UIViewController {
     
     //MARK: - Download Or Delete Repository
     @objc private func downloadRepository() {
-        if viewModel.repositoryExists() {
-            let alert = UIAlertController(title: "Delete Repository", message: "Do you want to delete this repository?", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Yes", style: .default) { action in
-                self.dismiss(animated: true) {
-                    self.viewModel.deleteRepository { (result) in
-                        if let result = result {
-                            self.callErrorAlert(message: result)
-                        }
-                    }
-                }
-            })
-            alert.addAction(UIAlertAction(title: "Cancel", style: .destructive) { action in
-                self.dismiss(animated: true, completion: nil)
-            })
-            present(alert, animated: true)
-        } else {
+        showActivityIndicator(alpha: 1)
+        if !viewModel.repositoryExists() {
             viewModel.downloadRepositoryZip { (result) in
+                self.hideActivityIndicator()
                 if let result = result {
                     self.callErrorAlert(message: result)
                 } else {
-                    self.downloadView.backgroundColor = .red
-                    self.downloadLabel.text = "Delete"
+                    self.downloadView.backgroundColor = .lightGray
+                    self.downloadLabel.text = "Downloaded"
                 }
             }
         }
+//        if viewModel.repositoryExists() {
+//            let alert = UIAlertController(title: "Delete Repository", message: "Do you want to delete this repository?", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "Yes", style: .default) { action in
+//                self.dismiss(animated: true) {
+//                    self.viewModel.deleteRepository { (result) in
+//                        if let result = result {
+//                            self.callErrorAlert(message: result)
+//                        }
+//                    }
+//                }
+//            })
+//            alert.addAction(UIAlertAction(title: "Cancel", style: .destructive) { action in
+//                self.dismiss(animated: true, completion: nil)
+//            })
+//            present(alert, animated: true)
+//        }
     }
     
 }

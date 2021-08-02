@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ztI-Qa-UBq">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -11,7 +12,6 @@
         <!--Downloads Collection View Controller-->
         <scene sceneID="9An-TH-NZl">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fbl-xw-Mm8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <collectionViewController storyboardIdentifier="DownloadsCollectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jLQ-Oz-fvE" customClass="DownloadsCollectionViewController" customModule="_205Test" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="0FA-eV-pDG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -25,14 +25,18 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="IEy-cG-wIa">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="user-icon" style="plain" id="yJ7-Z1-svh">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="user-icon" style="done" id="yJ7-Z1-svh">
                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="didTapLoginButton:" destination="jLQ-Oz-fvE" id="bWd-OJ-oqw"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="userBarButtonImage" destination="yJ7-Z1-svh" id="lyh-jO-Vf9"/>
+                    </connections>
                 </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fbl-xw-Mm8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="962" y="-5"/>
         </scene>
@@ -47,14 +51,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CJy-vI-NQh">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="358.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repo Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDm-tD-kCz">
-                                        <rect key="frame" x="113.5" y="115" width="187.5" height="43"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repo Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDm-tD-kCz">
+                                        <rect key="frame" x="20.5" y="115" width="373" height="43"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="36"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repo Owner" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6zK-g5-ZhX">
-                                        <rect key="frame" x="148" y="168" width="118" height="26.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repo Owner" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6zK-g5-ZhX">
+                                        <rect key="frame" x="20.5" y="168" width="373" height="26.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -81,8 +85,10 @@
                                 <constraints>
                                     <constraint firstItem="FOe-Ro-fBK" firstAttribute="leading" secondItem="CJy-vI-NQh" secondAttribute="leading" constant="30" id="GCN-fg-rXm"/>
                                     <constraint firstItem="vDm-tD-kCz" firstAttribute="centerX" secondItem="CJy-vI-NQh" secondAttribute="centerX" id="Vc9-gF-CQp"/>
+                                    <constraint firstItem="vDm-tD-kCz" firstAttribute="width" secondItem="CJy-vI-NQh" secondAttribute="width" multiplier="0.9" id="WC4-X0-jAD"/>
                                     <constraint firstItem="vDm-tD-kCz" firstAttribute="top" secondItem="CJy-vI-NQh" secondAttribute="top" constant="115" id="Yec-s4-Nzg"/>
                                     <constraint firstItem="FOe-Ro-fBK" firstAttribute="width" secondItem="CJy-vI-NQh" secondAttribute="width" multiplier="0.5" id="a76-JI-Qgu"/>
+                                    <constraint firstItem="6zK-g5-ZhX" firstAttribute="width" secondItem="vDm-tD-kCz" secondAttribute="width" id="hef-ki-OOG"/>
                                     <constraint firstItem="FOe-Ro-fBK" firstAttribute="height" secondItem="CJy-vI-NQh" secondAttribute="height" multiplier="0.2" id="kp4-dc-s6x"/>
                                     <constraint firstItem="6zK-g5-ZhX" firstAttribute="centerX" secondItem="CJy-vI-NQh" secondAttribute="centerX" id="lBt-2Z-WMM"/>
                                     <constraint firstItem="6zK-g5-ZhX" firstAttribute="top" secondItem="vDm-tD-kCz" secondAttribute="bottom" constant="10" id="qch-kE-V42"/>
@@ -178,12 +184,6 @@
         <!--Search View Controller-->
         <scene sceneID="zXm-NQ-xpS">
             <objects>
-                <searchBar contentMode="redraw" id="g7k-yK-c0G">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <textInputTraits key="textInputTraits"/>
-                </searchBar>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WFn-Vg-GYK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tableViewController storyboardIdentifier="SearchViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5dy-af-K5i" customClass="SearchViewController" customModule="_205Test" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="n6h-PQ-GDJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -198,13 +198,18 @@
                         <outlet property="searchBar" destination="g7k-yK-c0G" id="Rzo-FC-whr"/>
                     </connections>
                 </tableViewController>
+                <searchBar contentMode="redraw" id="g7k-yK-c0G">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WFn-Vg-GYK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1723" y="-5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="9nY-tQ-Nol">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SXg-Xm-zGI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ztI-Qa-UBq" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleAspectFit" id="gF1-WJ-5Uj">
@@ -216,6 +221,7 @@
                         <segue destination="jLQ-Oz-fvE" kind="relationship" relationship="rootViewController" id="bsU-hH-k9Q"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SXg-Xm-zGI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="140.57971014492756" y="-5.3571428571428568"/>
         </scene>

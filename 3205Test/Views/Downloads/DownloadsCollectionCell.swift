@@ -11,6 +11,8 @@ class DownloadsCollectionCell: UICollectionViewCell {
     
     static let reuseId = "DownloadsCellId"
     
+    @IBOutlet weak var repositoryName: UILabel!
+    @IBOutlet weak var repositoryOwnerName: UILabel!
     @IBOutlet weak var bgView: UIView!
 
     override func awakeFromNib() {

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -32,6 +32,8 @@
 		524F8C3E26B5F093006EB315 /* Colors+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524F8C3D26B5F093006EB315 /* Colors+Ext.swift */; };
 		524F8C4326B5F2C0006EB315 /* SelectedRepositoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524F8C4226B5F2C0006EB315 /* SelectedRepositoryViewModel.swift */; };
 		524F8C4626B6C70A006EB315 /* DownloadFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524F8C4526B6C709006EB315 /* DownloadFileService.swift */; };
+		525BEFA126B825F600FB8C87 /* RepositoriesList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 525BEF9F26B825F600FB8C87 /* RepositoriesList.xcdatamodeld */; };
+		525BEFA426B8264E00FB8C87 /* RepositoriesCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525BEFA326B8264E00FB8C87 /* RepositoriesCoreDataManager.swift */; };
 		52F55896235469EC855EAA10 /* Pods_3205Test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6970A621E04E6BE847946B /* Pods_3205Test.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +66,8 @@
 		524F8C3D26B5F093006EB315 /* Colors+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colors+Ext.swift"; sourceTree = "<group>"; };
 		524F8C4226B5F2C0006EB315 /* SelectedRepositoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedRepositoryViewModel.swift; sourceTree = "<group>"; };
 		524F8C4526B6C709006EB315 /* DownloadFileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadFileService.swift; sourceTree = "<group>"; };
+		525BEFA026B825F600FB8C87 /* RepositoriesList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RepositoriesList.xcdatamodel; sourceTree = "<group>"; };
+		525BEFA326B8264E00FB8C87 /* RepositoriesCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesCoreDataManager.swift; sourceTree = "<group>"; };
 		9B6970A621E04E6BE847946B /* Pods_3205Test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_3205Test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0F0D7B95FB8D410DE8D90E8 /* Pods-3205Test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-3205Test.debug.xcconfig"; path = "Target Support Files/Pods-3205Test/Pods-3205Test.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,6 +113,7 @@
 		524F8BB526B2FF00006EB315 /* 3205Test */ = {
 			isa = PBXGroup;
 			children = (
+				525BEF9F26B825F600FB8C87 /* RepositoriesList.xcdatamodeld */,
 				524F8BB626B2FF00006EB315 /* AppDelegate.swift */,
 				524F8BB826B2FF00006EB315 /* SceneDelegate.swift */,
 				524F8C0826B41F74006EB315 /* Secrets */,
@@ -172,6 +177,7 @@
 			children = (
 				524F8BFF26B40C79006EB315 /* GitHubAPIClient.swift */,
 				524F8C4526B6C709006EB315 /* DownloadFileService.swift */,
+				525BEFA326B8264E00FB8C87 /* RepositoriesCoreDataManager.swift */,
 				524F8C1B26B46B22006EB315 /* KeychainHelper.swift */,
 			);
 			path = Services;
@@ -318,6 +324,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				525BEFA426B8264E00FB8C87 /* RepositoriesCoreDataManager.swift in Sources */,
 				524F8BE126B307F1006EB315 /* DownloadsCollectionCell.swift in Sources */,
 				524F8BBB26B2FF00006EB315 /* DownloadsCollectionViewController.swift in Sources */,
 				524F8C4326B5F2C0006EB315 /* SelectedRepositoryViewModel.swift in Sources */,
@@ -326,6 +333,7 @@
 				524F8C2C26B55F7E006EB315 /* SearchTableCell.swift in Sources */,
 				524F8C3E26B5F093006EB315 /* Colors+Ext.swift in Sources */,
 				524F8BB726B2FF00006EB315 /* AppDelegate.swift in Sources */,
+				525BEFA126B825F600FB8C87 /* RepositoriesList.xcdatamodeld in Sources */,
 				524F8BD226B30328006EB315 /* UIViewController+Ext.swift in Sources */,
 				524F8BB926B2FF00006EB315 /* SceneDelegate.swift in Sources */,
 				524F8C4626B6C70A006EB315 /* DownloadFileService.swift in Sources */,
@@ -488,6 +496,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RWU4M8Y9HU;
 				INFOPLIST_FILE = 3205Test/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -508,6 +517,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RWU4M8Y9HU;
 				INFOPLIST_FILE = 3205Test/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -541,6 +551,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		525BEF9F26B825F600FB8C87 /* RepositoriesList.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				525BEFA026B825F600FB8C87 /* RepositoriesList.xcdatamodel */,
+			);
+			currentVersion = 525BEFA026B825F600FB8C87 /* RepositoriesList.xcdatamodel */;
+			path = RepositoriesList.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 524F8BAB26B2FF00006EB315 /* Project object */;
 }

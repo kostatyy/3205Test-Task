@@ -8,6 +8,18 @@
 import UIKit
 
 class DownloadsViewModel {
+    
+    var repositories: [Repository] = []
+    
+    //MARK: - Get List Of Saved Repositories
+    func getDownloadedRepositories(completion: @escaping ()->()) {
+        let savedRepos = RepositoriesCoreDataManager.shared.fetchRepositories()
+        repositories = []
+        for repo in savedRepos {
+            self.repositories.insert(repo, at: 0)
+        }
+        completion()
+    }
         
     //MARK: - GitHub Auth
     func requestForCallbackURL(request: URLRequest, completion: @escaping (String?)->()) {

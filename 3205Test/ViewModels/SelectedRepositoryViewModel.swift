@@ -30,6 +30,7 @@ class SelectedRepositoryViewModel {
             DispatchQueue.main.async {
                 switch result {
                 case .success(_):
+                    RepositoriesCoreDataManager.shared.saveRepository(repositoryInfo: repository)
                     completion(nil)
                 case .failure(let error):
                     completion(error.rawValue)
